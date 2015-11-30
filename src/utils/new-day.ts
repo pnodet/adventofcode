@@ -2,13 +2,13 @@ const DAY = 1;
 const YEAR = 2015;
 
 const template = (): Uint8Array => {
-	const encoder = new TextEncoder();
-	const data = encoder.encode(
-		`const TEST = false;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(
+    `const TEST = false;
 const file = await Deno.readTextFile(TEST ? "./sample.txt" : "./input.txt");
-console.log("file", file);\n`
-	);
-	return data;
+console.log("file", file);\n`,
+  );
+  return data;
 };
 
 const formatDay = (day: number | string) => day.toString().padStart(2, "0");
