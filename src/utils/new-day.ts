@@ -1,4 +1,4 @@
-const DAY = 1;
+const DAY = 2;
 const YEAR = 2015;
 
 const template = (): Uint8Array => {
