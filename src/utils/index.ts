@@ -32,22 +32,32 @@ export const updateMatrix = <T>(
   return result;
 };
 
-export const permutator = <T>(inputArr: T[]) => {
-  const result: T[] = [];
+export const permutator = <T>(array: T[]): T[][] => {
+  if (array.length === 1) return [array];
+  const permutations = [];
 
-  const permute = (arr: T[], m: any = []) => {
-    if (arr.length === 0) {
-      result.push(m);
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        const curr = arr.slice();
-        const next = curr.splice(i, 1);
-        permute(curr.slice(), m.concat(next));
-      }
+  const smallerPermutations = permutator(array.slice(1));
+  const firstOption = array[0];
+
+  for (
+    let permIndex = 0;
+    permIndex < smallerPermutations.length;
+    permIndex += 1
+  ) {
+    const smallerPermutation = smallerPermutations[permIndex];
+
+    for (
+      let positionIndex = 0;
+      positionIndex <= smallerPermutation.length;
+      positionIndex += 1
+    ) {
+      const permutationPrefix = smallerPermutation.slice(0, positionIndex);
+      const permutationSuffix = smallerPermutation.slice(positionIndex);
+      permutations.push(
+        permutationPrefix.concat([firstOption], permutationSuffix),
+      );
     }
-  };
+  }
 
-  permute(inputArr);
-
-  return result;
+  return permutations;
 };
